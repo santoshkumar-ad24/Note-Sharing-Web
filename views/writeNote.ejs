@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/src/favicon.png" type="image/png">
+    <title>SanNotes</title>
+    <link rel="stylesheet" href="/writeNote.css">
+</head>
+<body>
+<section>
+    <div class="contentPage">
+        <div class="left-side">
+            <p><%=title%>.txt</p>
+        </div>
+
+        <div id="contentArea">
+            <form action="/<%= title %>/notes" method="post" id="textForm">
+                <textarea name="content" id="details"><%= data%></textarea>
+            </form>
+            
+        </div>
+        <div id="saveArea">
+            <button id="submitForm" type="submit" form="textForm">SaveFile</button>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

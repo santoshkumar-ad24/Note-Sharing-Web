@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+}
+
+.contentPage{
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    /* height: 100vh; */
+
+
+}
+
+
+.left-side{
+    background-color: rgb(105, 119, 59);
+    padding: 0.7rem 1rem;
+    font-size: 1.5rem;
+}
+.left-side p{
+    border: 1px solid rgb(255, 255, 255);
+    padding: 0.3rem 1rem;
+    border-radius: 1rem;
+    background-color: rgb(92, 165, 104);
+    color: rgb(0, 82, 19);
+}
+
+#contentArea{
+    background-color: rgb(254, 254, 178);
+    padding: 0.5rem 1rem;
+    color: rgb(37, 46, 1);
+}
+
+#saveArea{
+    background-color: rgb(119, 133, 73);
+    padding: 0.5rem 1rem;
+    
+    
+}
+
+@media screen and (max-width: 700px) {
+  .contentPage {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 80px 1fr;
+
+  }
+
+  .left-side {
+    
+    grid-column: 1 / span 3;
+  }
+
+  #contentArea {
+    grid-column: 1 / span 4;
+    grid-row: 2 / span 2;
+  }
+
+  #saveArea {
+    grid-column: 4;
+    grid-row: 1 / span 1;
+    align-self: center;
+    justify-self: center;
+    border-radius: 2rem;
+  }
+}
+#details{
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(255, 255, 223);
+    padding: 0.5rem 1rem;
+    color: rgb(82, 102, 0);
+    border: none;
+    box-shadow: -1px -1px 3px rgb(65, 65, 0);
+    outline: none;
+    resize: none;
+    
+}
+#saveArea button{
+    outline: none;
+    border: none;
+    box-shadow: 1px 1px 3px rgb(0, 34, 0);
+    padding: 0.5rem;
+    background-color: green;
+    border-radius: 1rem;
+}
