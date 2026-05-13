@@ -1,52 +1,223 @@
-*{
-  padding: 0;
-  margin:  0;
-  box-sizing: border-box;
+:root {
+    color-scheme: dark;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #e8f7ff;
+    background: #071016;
 }
 
-
-body{
-  width: 100%;
-  height: 100%;
-  
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.notesCon{
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  background-color: navajowhite;
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, rgba(0, 243, 255, 0.18), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(40, 210, 255, 0.12), transparent 22%),
+        linear-gradient(180deg, #04080d 0%, #08131f 55%, #08131f 100%);
 }
 
-.files{
-  background-color: rgb(61, 64, 0);
-  display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: 2rem;
-  
-}
-.files h1{
-  color: whitesmoke;
-}
-
-#filesName{
-  border: 2px solid black;
-  outline: none;
-  padding: 0.6rem;
-  border-radius: 1rem;
-  background-color: rgb(250, 250, 214);
-  
-}
-
-@media screen and (max-width: 500px) {
-  .files{
+.page-shell {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
-    padding-bottom: 0;
-  }
+    padding: 2rem;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-radius: 32px;
+    background: rgba(7, 22, 37, 0.72);
+    border: 1px solid rgba(102, 238, 255, 0.18);
+    box-shadow: 0 40px 120px rgba(0, 150, 255, 0.08);
+    backdrop-filter: blur(18px);
+}
+
+.eyebrow {
+    display: inline-flex;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(0, 238, 255, 0.12);
+    color: #a5f3ff;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+}
+
+.hero-copy h1 {
+    font-size: clamp(2.7rem, 4vw, 4.5rem);
+    line-height: 1.02;
+    max-width: 13ch;
+    margin-bottom: 1.25rem;
+    color: #d3f7ff;
+}
+
+.hero-copy p {
+    max-width: 40rem;
+    line-height: 1.8;
+    color: #c6ebff;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+}
+
+.hero-form {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.hero-form input {
+    flex: 1 1 270px;
+    min-width: 220px;
+    padding: 1rem 1.2rem;
+    border-radius: 18px;
+    border: 1px solid rgba(113, 249, 255, 0.22);
+    background: rgba(5, 24, 40, 0.9);
+    color: #e8f7ff;
+    font-size: 1rem;
+    outline: none;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-form input:focus {
+    border-color: #54d9ff;
+    box-shadow: 0 0 0 4px rgba(84, 217, 255, 0.12);
+    transform: translateY(-1px);
+}
+
+.hero-form button {
+    padding: 1rem 1.6rem;
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #4be7ff, #1a97ff);
+    color: #04162a;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.hero-form button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+}
+
+.hero-hint {
+    margin-top: 1rem;
+    color: rgba(196, 234, 255, 0.78);
+}
+
+.hero-panel {
+    display: flex;
+    justify-content: center;
+}
+
+.panel-card {
+    width: 100%;
+    min-height: 320px;
+    padding: 2rem;
+    border-radius: 30px;
+    background: linear-gradient(180deg, rgba(3, 19, 30, 0.96), rgba(1, 10, 18, 0.95));
+    border: 1px solid rgba(95, 235, 255, 0.12);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03), 0 25px 60px rgba(0, 130, 210, 0.08);
+}
+
+.panel-card h2 {
+    margin-bottom: 0.8rem;
+    color: #b6f5ff;
+    font-size: 1.85rem;
+}
+
+.panel-card p {
+    color: #a9e8ff;
+    margin-bottom: 2rem;
+    line-height: 1.75;
+}
+
+.panel-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.panel-grid div {
+    padding: 1rem 1.15rem;
+    border-radius: 20px;
+    background: rgba(4, 19, 34, 0.82);
+    border: 1px solid rgba(79, 224, 255, 0.12);
+}
+
+.panel-grid span {
+    display: block;
+    color: #8ad8ff;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.panel-grid strong {
+    color: #e8fbff;
+    font-size: 1.05rem;
+}
+
+.page-footer {
+    margin-top: auto;
+    padding-top: 3rem;
+    text-align: center;
+    color: rgba(197, 234, 255, 0.68);
+}
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@media screen and (max-width: 920px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+    }
+
+    .hero-panel {
+        order: -1;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .page-shell {
+        padding: 1.4rem;
+    }
+
+    .hero {
+        gap: 1.25rem;
+        border-radius: 24px;
+    }
+
+    .hero-form {
+        flex-direction: column;
+    }
+
+    .hero-form button,
+    .hero-form input {
+        width: 100%;
+    }
+
+    .hero-copy h1 {
+        font-size: 2.6rem;
+    }
 }
 

@@ -4,27 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/src/favicon.png" type="image/png">
-    <title>SanNotes</title>
+    <title>ShareNote — <%= title %></title>
     <link rel="stylesheet" href="/writeNote.css">
 </head>
 <body>
-<section>
-    <div class="contentPage">
-        <div class="left-side">
-            <p><%=title%>.txt</p>
+    <div class="page-container">
+        <div class="note-shell">
+            <header class="note-header">
+                <div class="note-info">
+                    <span class="note-label">Editing</span>
+                    <h1><%= title %></h1>
+                </div>
+                <div class="note-actions">
+                    <a href="/" class="back-link">← Home</a>
+                    <button id="submitForm" type="submit" form="textForm">Save note</button>
+                </div>
+            </header>
+
+            <main class="editor-frame">
+                <form action="/<%= title %>/notes" method="post" id="textForm">
+                    <textarea name="content" id="details" placeholder="Write your note here..."><%= data %></textarea>
+                </form>
+            </main>
         </div>
 
-        <div id="contentArea">
-            <form action="/<%= title %>/notes" method="post" id="textForm">
-                <textarea name="content" id="details"><%= data%></textarea>
-            </form>
-            
-        </div>
-        <div id="saveArea">
-            <button id="submitForm" type="submit" form="textForm">SaveFile</button>
-        </div>
-
+        <aside class="ad-card">
+            <button class="ad-nav ad-nav-prev" aria-label="Previous ad">❮</button>
+            <div class="ad-carousel" id="adCarousel">
+                <div class="ad-item">
+                    <img src="/src/saniova.png" alt="Saniova Blog" class="ad-image">
+                    <div class="ad-content">
+                        <span class="ad-tag">Sponsored</span>
+                        <h3>Visit Saniova</h3>
+                        <p>Discover amazing blogs and tutorials.</p>
+                        <a href="https://saniova.com" class="ad-link" target="_blank" rel="noopener noreferrer">Explore</a>
+                    </div>
+                </div>
+                <div class="ad-item">
+                    <img src="/src/saniova2.jpg" alt="Saniova Insights" class="ad-image">
+                    <div class="ad-content">
+                        <span class="ad-tag">Featured</span>
+                        <h3>Saniova Insights</h3>
+                        <p>Get the latest coding tips.</p>
+                        <a href="https://saniova.com/insights" class="ad-link" target="_blank" rel="noopener noreferrer">Learn More</a>
+                    </div>
+                </div>
+                <div class="ad-item">
+                    <img src="/src/saniova3.jpg" alt="Saniova Tutorials" class="ad-image">
+                    <div class="ad-content">
+                        <span class="ad-tag">New</span>
+                        <h3>Saniova Tutorials</h3>
+                        <p>Step-by-step developer guides.</p>
+                        <a href="https://saniova.com/tutorials" class="ad-link" target="_blank" rel="noopener noreferrer">Start Now</a>
+                    </div>
+                </div>
+            </div>
+            <button class="ad-nav ad-nav-next" aria-label="Next ad">❯</button>
+            <div class="ad-dots">
+                <span class="ad-dot active" data-index="0"></span>
+                <span class="ad-dot" data-index="1"></span>
+                <span class="ad-dot" data-index="2"></span>
+            </div>
+        </aside>
     </div>
-</section>
+
+    <script src="/writeNote.js"></script>
 </body>
 </html>

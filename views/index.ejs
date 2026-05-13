@@ -5,27 +5,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/src/favicon.png" type="image/png">
-
-    <title>SanNotes</title>
+    <title>ShareNote</title>
     <link rel="stylesheet" href="/style.css">
-
 </head>
 
 <body>
-    <section class="notesCon">
-        <div class="files">
+    <div class="page-shell">
+        <main class="hero">
+            <div class="hero-copy">
+                <span class="eyebrow">ShareNote</span>
+                <h1>Fast notes in a sleek cyan workspace.</h1>
+                <p>Type a note name, open your file, and edit in a polished, futuristic editor.</p>
 
-            <h1>SanNotes</h1>
-            <form  id= "titleChange" method="post">
-                <input type="text" placeholder="File name" id="filesName" name="title">
-            </form>
-            
-        </div>
-        <p style="color: rgb(32, 35, 10);">-- Input your desired file name --</p>
-    </section>
+                <form id="titleChange" method="post" class="hero-form">
+                    <label class="visually-hidden" for="filesName">Note name</label>
+                    <input type="text" id="filesName" name="title" placeholder="Enter note name" autocomplete="off" required>
+                    <button type="submit">Open note</button>
+                </form>
+
+                <p class="hero-hint">Use letters, numbers, or hyphens. Press Enter or click Open note.</p>
+            </div>
+
+            <aside class="hero-panel">
+                <div class="panel-card">
+                    <h2>ShareNote</h2>
+                    <p>Minimal note files, maximum clarity.</p>
+                    <div class="panel-grid">
+                        <div>
+                            <span>Keep it simple</span>
+                            <strong>One file at a time</strong>
+                        </div>
+                        <div>
+                            <span>Built for focus</span>
+                            <strong>Clean cyan theme</strong>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <footer class="page-footer">
+            <p>Designed for fast sharing and clear note editing.</p>
+        </footer>
+    </div>
 
     <script src="/index.js"></script>
-
 </body>
 
 </html>
