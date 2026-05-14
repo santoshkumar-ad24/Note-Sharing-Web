@@ -1,52 +1,55 @@
 const express = require('express');
 const app = express();
-const fs =require('fs');
 const path = require('path');
 const PORT = process.env.PORT || 3000;
+
+// Import database functions
+const { connectDB, getNote, saveNote, closeDB } = require('./db');
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs')
 
-app.use(express.static(path.join(__dirname, 'frontend')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req,res)=>{
     res.render('index')
 })
 
-const files = path.join(__dirname, 'files');
-
-app.post('/:title/', (req, res) => {
-    const title = req.params.title;
-    const filePath = path.join(files, `${title}.txt`);
-    let content = "";
-
-    if (!fs.existsSync(filePath)) {
-        fs.writeFileSync(filePath, '');
-    } else {
-        content = fs.readFileSync(filePath, 'utf-8');
+app.post('/:title/', async (req, res) => {
+    try {
+        const title = req.params.title;
+        const content = await getNote(title);
+        res.render("writeNote", { title: title, data: content });
+    } catch (error) {
+        console.error('Error loading note:', error);
+        res.status(500).send('Error loading note');
     }
-    // Changed view name to match your prompt "writeNote.ejs"
-    res.render("writeNote", { title: title, data: content });
 });
 
-app.post('/api/save/:title', (req, res) => {
-    const title = req.params.title;
-    const content = req.body.content;
-    const filePath = path.join(files, `${title}.txt`);
-
-    fs.writeFile(filePath, content, (err) => {
-        if (err) {
-            return res.status(500).json({ success: false, message: "Save failed" });
-        }
+app.post('/api/save/:title', async (req, res) => {
+    try {
+        const title = req.params.title;
+        const content = req.body.content;
+        
+        await saveNote(title, content);
         res.json({ success: true, message: "Saved successfully" });
-    });
+    } catch (error) {
+        console.error('Error saving note:', error);
+        res.status(500).json({ success: false, message: "Save failed" });
+    }
 });
 
 
-
-
-
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+    await connectDB();
     console.log(`✅ Server is running on port ${PORT}`);
     console.log(`🌐 Access it at: http://127.0.0.1:${PORT}`);
+});
+
+// Handle graceful shutdown
+process.on('SIGINT', async () => {
+    console.log('\n🛑 Shutting down gracefully...');
+    await closeDB();
+    process.exit(0);
 });
