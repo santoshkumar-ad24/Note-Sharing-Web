@@ -1,1 +1,72 @@
-hii 
+.status-idle {
+    color: #a8ffb8;
+    overflow: hidden;
+    white-space: nowrap;
+    background: rgba(0, 40, 10, 0.6);
+    animation: 
+        typewriter 1s steps(6, end) forwards, /* slower typing */
+        pulse-glow 1s infinite ease-in-out;   /* smoother glow */
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 6ch; } /* reveal exactly 6 characters */
+}
+
+@keyframes pulse-glow {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.02); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+.note-shell {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    border-radius: 32px;
+    background: rgba(5, 19, 33, 0.88);
+    border: 1px solid rgba(96, 217, 255, 0.18);
+    box-shadow: 0 35px 120px rgba(0, 100, 200, 0.12);
+    backdrop-filter: blur(18px);
+    height: calc(100vh - 5vh); /* fills viewport minus header space */
+}
+
+.note-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.3rem 1.5rem;
+}
+
+.editor-frame {
+    flex: 1;                  /* take all remaining space in note-shell */
+    display: flex;
+    flex-direction: column;   /* stack save-status and textarea */
+    border-radius: 28px 28px 0 0;
+    overflow: hidden;
+    border: 1px solid rgba(84, 233, 255, 0.18);
+    border-bottom: none;
+    background: rgba(5, 19, 33, 0.88);
+}
+
+#save-status {
+    padding: 0.5rem 1rem;
+    flex-shrink: 0;           /* status bar stays at natural height */
+}
+
+.details {
+    flex: 1;                  /* textarea fills remaining space */
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #eafcff;
+    background: transparent;
+    font-family: inherit;
+}
+

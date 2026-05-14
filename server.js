@@ -3,7 +3,6 @@ const app = express();
 const fs =require('fs');
 const path = require('path');
 const PORT = process.env.PORT || 3000;
-let data;
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs')
@@ -14,27 +13,34 @@ app.get('/', (req,res)=>{
     res.render('index')
 })
 
+const files = path.join(__dirname, 'files');
 
+app.post('/:title/', (req, res) => {
+    const title = req.params.title;
+    const filePath = path.join(files, `${title}.txt`);
+    let content = "";
 
-app.post('/:title/', (req,res)=>{
-    const title = req.params.title
-    if(!fs.existsSync(path.join('./files', `${title}.txt`))){
-        fs.writeFileSync(`./files/${title}.txt`,'');
+    if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, '');
+    } else {
+        content = fs.readFileSync(filePath, 'utf-8');
     }
-    else{
-        data = fs.readFileSync(path.join('./files', `${title}.txt`), 'utf-8')
-    }
-    res.render("writeNote", {title:title, data:data})
-})
+    // Changed view name to match your prompt "writeNote.ejs"
+    res.render("writeNote", { title: title, data: content });
+});
 
-app.post('/:title/notes', (req,res)=>{
-    const titles = req.params.title
-    if(fs.existsSync(path.join('./files', `${titles}.txt`))){
-            fs.writeFileSync(path.join('./files', `${titles}.txt`), req.body.content)
+app.post('/api/save/:title', (req, res) => {
+    const title = req.params.title;
+    const content = req.body.content;
+    const filePath = path.join(files, `${title}.txt`);
 
-    }
-    res.redirect('/')
-})
+    fs.writeFile(filePath, content, (err) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: "Save failed" });
+        }
+        res.json({ success: true, message: "Saved successfully" });
+    });
+});
 
 
 

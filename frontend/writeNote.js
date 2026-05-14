@@ -1,4 +1,4 @@
-// Ad Carousel Controller
+
 class AdCarousel {
     constructor() {
         this.carousel = document.getElementById('adCarousel');
@@ -8,21 +8,19 @@ class AdCarousel {
         this.items = document.querySelectorAll('.ad-item');
         this.currentIndex = 0;
         this.autoSlideTimer = null;
-        this.autoSlideDelay = 10000; // 10 seconds
+        this.autoSlideDelay = 10000;
 
         this.init();
     }
 
-    
+
 
     init() {
         if (!this.carousel) return;
 
-        // Event listeners for navigation buttons
         this.prevBtn?.addEventListener('click', () => this.prevSlide());
         this.nextBtn?.addEventListener('click', () => this.nextSlide());
 
-        // Event listeners for dot navigation
         this.dots.forEach((dot) => {
             dot.addEventListener('click', (e) => {
                 const index = parseInt(e.target.dataset.index);
@@ -30,11 +28,9 @@ class AdCarousel {
             });
         });
 
-        // Stop auto-slide on manual interaction
         this.carousel.addEventListener('mouseenter', () => this.stopAutoSlide());
         this.carousel.addEventListener('mouseleave', () => this.startAutoSlide());
 
-        // Start auto-slide after initial delay
         setTimeout(() => this.startAutoSlide(), 500);
     }
 
@@ -94,8 +90,83 @@ class AdCarousel {
     }
 }
 
-// Initialize carousel when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new AdCarousel();
 });
+
+
+const textarea = document.getElementById('note-content');
+const statusDiv = document.getElementById('save-status');
+let lastSavedContent = textarea.value;
+let debounceTimer = null;
+let stopNoneBlock;
+function updateStatus(state) {
+    statusDiv.classList.remove('status-idle', 'status-saving', 'status-error');
+
+    if (state === 'saving') {
+        statusDiv.style.display = 'block';
+        statusDiv.innerText = "Saving...";
+        statusDiv.classList.add('status-saving');
+    } else if (state === 'saved') {
+        statusDiv.style.display = 'block';
+        statusDiv.innerText = "Saved";
+        statusDiv.classList.add('status-idle');
+        if (stopNoneBlock) clearTimeout(stopNoneBlock);
+        stopNoneBlock = setTimeout(() => {
+            statusDiv.style.display = 'none';
+            stopNoneBlock = null
+        }, 1000);
+
+        
+    } else if (state === 'error') {
+        statusDiv.style.display = 'block';
+        statusDiv.innerText = "Error saving!";
+        statusDiv.classList.add('status-error');
+        if (stopNoneBlock) clearTimeout(stopNoneBlock);
+        stopNoneBlock = setTimeout(() => {
+            statusDiv.style.display = 'none';
+            stopNoneBlock = null
+        }, 1000);
+    }
+}
+
+async function autoSave() {
+    const currentContent = textarea.value;
+
+    if (currentContent === lastSavedContent) return;
+
+
+    try {
+        const response = await fetch(`/api/save/${noteTitle}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: currentContent })
+        });
+
+        if (response.ok) {
+            lastSavedContent = currentContent;
+            updateStatus('saved');
+        } else {
+            updateStatus('error');
+        }
+    } catch (err) {
+        console.error(err);
+        updateStatus('error');
+    }
+}
+
+textarea.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+
+    debounceTimer = setTimeout(() => {
+        updateStatus('saving');
+
+        setTimeout(() => {
+            autoSave();         
+        }, 2000);
+
+    }, 1000);
+});
+
+window.addEventListener('blur', autoSave);
 

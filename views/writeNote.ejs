@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/src/favicon.png" type="image/png">
-    <title>ShareNote — <%= title %></title>
+    <title>ShareNote — <%= title %>
+    </title>
     <link rel="stylesheet" href="/writeNote.css">
 </head>
+
 <body>
     <div class="page-container">
         <div class="note-shell">
-            <header class="note-header">
-                <div class="note-info">
-                    <span class="note-label">Editing</span>
-                    <h1><%= title %></h1>
-                </div>
-                <div class="note-actions">
-                    <a href="/" class="back-link">← Home</a>
-                    <button id="submitForm" type="submit" form="textForm">Save note</button>
-                </div>
-            </header>
+            <div class="note-header">
+                <h1>
+                    <%= title %>
+                </h1>
 
+                <a href="/" class="back-link">← Home</a>
+
+            </div>
             <main class="editor-frame">
-                <form action="/<%= title %>/notes" method="post" id="textForm">
-                    <textarea name="content" id="details" placeholder="Write your note here..."><%= data %></textarea>
-                </form>
+                <div id="save-status" class="status-idle"></div>
+                <textarea class="details" id="note-content" placeholder="Write your note here..."><%= data %></textarea>
             </main>
         </div>
 
@@ -37,7 +36,10 @@
                         <span class="ad-tag">Sponsored</span>
                         <h3>Visit Saniova</h3>
                         <p>Discover amazing blogs and tutorials.</p>
-                        <a href="https://saniova.com" class="ad-link" target="_blank" rel="noopener noreferrer">Explore</a>
+                        <div class="ad-click">
+                        <a href="https://saniova.com" class="ad-link" target="_blank"
+                            rel="noopener noreferrer">Explore</a>
+                        </div>
                     </div>
                 </div>
                 <div class="ad-item">
@@ -46,7 +48,10 @@
                         <span class="ad-tag">Featured</span>
                         <h3>Saniova Insights</h3>
                         <p>Get the latest coding tips.</p>
-                        <a href="https://saniova.com/insights" class="ad-link" target="_blank" rel="noopener noreferrer">Learn More</a>
+                        <div class="ad-click">
+                            <a href="https://saniova.com/insights" class="ad-link" target="_blank"
+                            rel="noopener noreferrer">Learn More</a>
+                        </div>
                     </div>
                 </div>
                 <div class="ad-item">
@@ -55,7 +60,10 @@
                         <span class="ad-tag">New</span>
                         <h3>Saniova Tutorials</h3>
                         <p>Step-by-step developer guides.</p>
-                        <a href="https://saniova.com/tutorials" class="ad-link" target="_blank" rel="noopener noreferrer">Start Now</a>
+                        <div class="ad-click">
+                        <a href="https://saniova.com/tutorials" class="ad-link" target="_blank"
+                            rel="noopener noreferrer">Start Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,7 +75,8 @@
             </div>
         </aside>
     </div>
-
+    <script>const noteTitle = "<%= title %>";</script>
     <script src="/writeNote.js"></script>
 </body>
+
 </html>

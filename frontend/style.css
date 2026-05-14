@@ -19,10 +19,12 @@ body {
 }
 
 .page-shell {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem 2rem;
 }
 
 .hero {
@@ -32,7 +34,7 @@ body {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 3rem 2rem;
+    padding: 2rem 2rem;
     border-radius: 32px;
     background: rgba(7, 22, 37, 0.72);
     border: 1px solid rgba(102, 238, 255, 0.18);
@@ -64,7 +66,6 @@ body {
     max-width: 40rem;
     line-height: 1.8;
     color: #c6ebff;
-    margin-bottom: 2rem;
     font-size: 1.05rem;
 }
 
@@ -73,6 +74,8 @@ body {
     gap: 1rem;
     flex-wrap: wrap;
     align-items: center;
+
+    overflow: hidden;
 }
 
 .hero-form input {
@@ -192,9 +195,6 @@ body {
         padding: 2rem;
     }
 
-    .hero-panel {
-        order: -1;
-    }
 }
 
 @media screen and (max-width: 620px) {
@@ -214,10 +214,282 @@ body {
     .hero-form button,
     .hero-form input {
         width: 100%;
+        max-height: fit-content;
     }
 
     .hero-copy h1 {
         font-size: 2.6rem;
+    }
+}
+
+.ad-banner {
+    position: relative;
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: 860px;
+    border-radius: 26px;
+    background: rgba(4, 17, 31, 0.88);
+    border: 1px solid rgba(81, 216, 255, 0.16);
+    box-shadow: 0 28px 70px rgba(0, 115, 190, 0.15);
+    backdrop-filter: blur(18px);
+    overflow: hidden;
+}
+
+.ad-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.ad-banner .ad-carousel {
+    position: relative;
+    display: flex;
+    width: 100%;
+    transition: transform 0.45s ease;
+    will-change: transform;
+}
+
+.ad-item {
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    height: 100%;
+}
+
+.ad-image {
+    width: 180px;
+    height: 100%;
+    min-width: 170px;
+    border-radius: 18px;
+    object-fit: cover;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ad-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+    min-width: 0;
+    flex: 1;
+    padding-right: 2.5rem;
+}
+
+.ad-tag {
+    display: inline-flex;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(72, 210, 255, 0.16);
+    color: #a6f0ff;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: clamp(0.65rem, 1vw, 0.8rem);
+    width: fit-content;
+}
+
+.ad-content h3 {
+    margin: 0;
+    font-size: clamp(0.7rem, 2.2vw, 1.2rem);
+    color: #e8fbff;
+}
+
+.ad-content p {
+    margin: 0;
+    font-size: clamp(0.5rem, 1.2vw, 0.8rem);
+    line-height: 1.7;
+    color: #d7ecff;
+    max-width: 48rem;
+}
+
+.ad-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 0.82rem 1.35rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #4fd8ff, #1da8d9);
+    color: #041d2e;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    transition: transform 0.2s ease, filter 0.2s ease;
+    cursor: pointer;
+}
+
+.ad-link:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+}
+
+.ad-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(81, 216, 255, 0.28);
+    background: rgba(16, 50, 70, 0.82);
+    color: #a6f0ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.ad-nav:hover {
+    background: rgba(81, 216, 255, 0.18);
+    box-shadow: 0 0 18px rgba(79, 216, 255, 0.35);
+}
+
+.ad-nav-prev {
+    left: 12px;
+}
+
+.ad-nav-next {
+    right: 12px;
+}
+
+.ad-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.6rem;
+    z-index: 11;
+}
+
+.ad-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(81, 216, 255, 0.3);
+    border: 1px solid rgba(81, 216, 255, 0.45);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.ad-dot.active {
+    background: #4fd8ff;
+    box-shadow: 0 0 12px rgba(79, 216, 255, 0.55);
+}
+
+.ad-dot:hover {
+    background: rgba(81, 216, 255, 0.55);
+}
+.ad-click{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 940px) {
+    .ad-banner {
+        width: calc(100% - 1.5rem);
+        
+    }
+
+    .ad-item {
+        gap: 0.85rem;
+        padding: 1rem;
+    }
+
+    .ad-image {
+        width: 200px;
+        min-width: 140px;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+@media screen and (max-width: 720px) {
+
+
+
+    .ad-item {
+        flex-direction: row;
+        align-items: center;
+        padding: 0.6rem 2.3rem;
+    }
+
+    .ad-image {
+        width: 150px;
+        min-width: 120px;
+        height: 100%;
+        border-radius: 18px;
+    }
+
+    .ad-content {
+        gap: 0.65rem;
+    }
+
+    .ad-link {
+        width: fit-content;
+        justify-content: center;
+    }
+    .ad-content{
+        padding-right:1rem;
+    }
+    .ad-nav {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .ad-banner {
+       
+        width: calc(100% - 1rem);
+        border-radius: 22px;
+    }
+    .ad-item{
+        padding: 0.3rem 0.5rem;
+    }
+    .ad-image {
+        display: none;
+    }
+    .ad-content{
+        position: relative;
+    }
+    .ad-content h3 {
+        font-size: clamp(1.1rem, 1.2vw, 1.5rem);;
+    }
+
+    .ad-content p {
+        font-size: clamp(0.8rem, 1.2vw, 1.1rem);
+        display: -webkit-box;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .ad-click{
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+    }
+    .ad-link{
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.118);
+        font-size: 0;
+        
+    }
+    .ad-dots {
+        display: none;
     }
 }
 
