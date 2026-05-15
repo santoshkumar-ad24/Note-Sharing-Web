@@ -177,6 +177,67 @@ body {
     color: rgba(197, 234, 255, 0.68);
 }
 
+.footer-links {
+    display: inline-flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: #8ad8ff;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #d3f7ff;
+    border-color: rgba(173, 249, 255, 0.45);
+}
+
+.info-page {
+    max-width: 910px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 32px;
+    background: rgba(7, 22, 37, 0.72);
+    border: 1px solid rgba(102, 238, 255, 0.18);
+    box-shadow: 0 40px 120px rgba(0, 150, 255, 0.08);
+    backdrop-filter: blur(18px);
+}
+
+.info-page h1,
+.info-page h2 {
+    color: #d3f7ff;
+    margin-bottom: 1rem;
+}
+
+.info-page p,
+.info-page li {
+    color: #c6ebff;
+    line-height: 1.8;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.info-page ul {
+    list-style: disc inside;
+    margin-left: 0;
+    margin-bottom: 1rem;
+}
+
+.info-page a {
+    color: #74d7ff;
+    text-decoration: underline;
+}
+
+.info-page a:hover {
+    color: #e5f9ff;
+}
+
 .visually-hidden {
     position: absolute !important;
     width: 1px;

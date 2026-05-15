@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /
+Allow: /$
+Allow: /about
+Allow: /privacy-policy
+Allow: /disclaimer
+Allow: /sitemap.xml
+Sitemap: http://textora-eta.vercel.app/sitemap.xml

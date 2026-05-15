@@ -16,6 +16,18 @@ app.get('/', (req,res)=>{
     res.render('index')
 })
 
+app.get('/about', (req, res) => {
+    res.render('about')
+})
+
+app.get('/privacy-policy', (req, res) => {
+    res.render('privacy-policy')
+})
+
+app.get('/disclaimer', (req, res) => {
+    res.render('disclaimer')
+})
+
 app.post('/:title/', async (req, res) => {
     try {
         const title = req.params.title;
